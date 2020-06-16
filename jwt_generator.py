@@ -23,7 +23,7 @@ def load_json_file(name):
         abort(f"file '{name}' is malformed")
 
 
-def build_aws_lambda_env_vars_page_link(stage):
+def build_aws_edit_env_vars_page_link(stage):
     """
     Build the direct link to the corresponding AWS Console page for editing the
     Lambda's environment variables.
@@ -72,7 +72,7 @@ def encode_jwt(payload, secret_key):
     return jwt.encode(header, payload, secret_key).decode('utf-8')
 
 
-def build_tr_module_page_link(region, module_type_id):
+def build_tr_create_module_page_link(region, module_type_id):
     """
     Build the direct link to the corresponding Threat Response page in the
     given region for creating a module of the given type.
@@ -97,7 +97,7 @@ def main():
         abort(f'Usage: python {sys.argv[0]} <stage>')
 
     stage = sys.argv[1]
-    aws_lambda_env_vars_page_link = build_aws_lambda_env_vars_page_link(stage)
+    aws_edit_env_vars_page_link = build_aws_edit_env_vars_page_link(stage)
 
     module_settings = load_json_file('module_settings.json')
 
@@ -112,13 +112,13 @@ def main():
         f'    {secret_key}',
         'Use this URL to navigate to the AWS Console and configure the '
         'SECRET_KEY environment variable using the above value:',
-        f'    {aws_lambda_env_vars_page_link}',
+        f'    {aws_edit_env_vars_page_link}',
         'Use one of these URLs to navigate to Threat Response in your region '
         f"and create the {module_settings['name']} module using your Lambda's "
         'URL and the JWT:',
         '\n'.join(
             f'    {region.upper()}: '
-            f'{build_tr_module_page_link(region, module_type_id)}'
+            f'{build_tr_create_module_page_link(region, module_type_id)}'
             for region, module_type_id in module_settings['region'].items()
         )
     ])
