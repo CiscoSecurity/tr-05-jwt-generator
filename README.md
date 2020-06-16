@@ -17,6 +17,11 @@ integration, encodes them into a `JWT` and signs it with a randomly generated
 
 3. Instructs the user what to do next.
 
+**NOTE.** The script assumes that in its the working directory there are two
+configuration files: `zappa_settings.json` and `module_settings.json`. Check
+the [Relay Template](https://github.com/CiscoSecurity/tr-05-serverless-relay)
+to get more insight into how such files may look like.
+
 ## Example Output
 
 ```
