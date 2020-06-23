@@ -26,7 +26,7 @@ to get more insight into how such files may look like.
 
 ```
 python3 jwt_generator.py dev
-Enter: Gigamon ThreatINSIGHT API KEY: kfy0d9D-MpTDTdoeaPVKFA
+Enter: Gigamon ThreatINSIGHT API Key: kfy0d9D-MpTDTdoeaPVKFA
 The JWT for the Gigamon ThreatINSIGHT module is:
     eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJrZnkwZDlELU1wVERUZG9lYVBWS0ZBIn0.QWE9wwC2U_6UeJaav2kUXPFTF3aljGL-T0oMaZfMT5k
 The SECRET_KEY to validate the JWT is:
@@ -34,7 +34,7 @@ The SECRET_KEY to validate the JWT is:
 Use this URL to navigate to the AWS Console and configure the SECRET_KEY environment variable using the above value:
     https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions/tr-gigamon-threatinsight-relay-dev/edit/environment-variables?tab=configuration
 Use one of these URLs to navigate to Threat Response in your region and create the Gigamon ThreatINSIGHT module using your Lambda's URL and the JWT:
-    US: https://visibility.amp.cisco.com/settings/modules/available/3113dda1-1018-4586-a8bf-f5363e1b3aed/new
-    EU: N/A
-    APJC: N/A
+    US: https://visibility.amp.cisco.com/settings/modules/available/f4b2cf01-0447-436e-8dc1-b0b15049888b/new
+    EU: https://visibility.eu.amp.cisco.com/settings/modules/available/cdf11c33-0891-491a-8e36-201e4decd3d0/new
+    APJC: https://visibility.apjc.amp.cisco.com/settings/modules/available/904e961f-ff81-48f5-aeb0-5c033e2054b7/new
 ```
