@@ -1,3 +1,4 @@
+import argparse
 import json
 import secrets
 import string
@@ -8,7 +9,7 @@ from authlib.jose import jwt
 
 def abort(message):
     """Print an error message and exit the program."""
-    print('Error:', message)
+    print(f'{sys.argv[0]}: error:', message)
     sys.exit(1)
 
 
@@ -27,8 +28,9 @@ def build_aws_edit_env_vars_page_link(stage):
     """
     Build the direct link to the corresponding AWS Console page for editing the
     Lambda's environment variables.
-    Use `project_name` and `aws_region` of the specified stage defined in the
-    `zappa_settings.json` file for building the link.
+
+    The link is built using `project_name` and `aws_region` of the given stage
+    defined in the `zappa_settings.json` file.
     """
 
     try:
@@ -93,16 +95,28 @@ def build_tr_create_module_page_link(region, module_type_id):
 
 
 def main():
-    if len(sys.argv) < 2:
-        abort(f'Usage: python {sys.argv[0]} <stage>')
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        'stage',
+        help="a Zappa stage defined in the 'zappa_settings.json' file",
+    )
+    parser.add_argument(
+        '-f', '--file',
+        help='a JSON file with some credentials to encode into a JWT',
+    )
 
-    stage = sys.argv[1]
-    aws_edit_env_vars_page_link = build_aws_edit_env_vars_page_link(stage)
+    args = parser.parse_args()
+
+    aws_edit_env_vars_page_link = build_aws_edit_env_vars_page_link(args.stage)
 
     module_settings = load_json_file('module_settings.json')
 
     secret_key = generate_secret_key()
-    payload = enter_credentials(module_settings['jwt'])
+    payload = (
+        enter_credentials(module_settings['jwt'])
+        if args.file is None else
+        load_json_file(args.file)
+    )
     jwt = encode_jwt(payload, secret_key)
 
     message = '\n'.join([
