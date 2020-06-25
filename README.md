@@ -4,7 +4,9 @@ Simple Python (3.6+) script that:
 
 1. Prompts the user to enter the required third-party credentials for a given
 integration, encodes them into a `JWT` and signs it with a randomly generated
-`SECRET_KEY`.
+`SECRET_KEY`. If the credentials are already in a JSON file, then the user may
+just pass the file as an additional argument to the script using the optional
+`-f/--file` parameter, e.g. `-f credentials.json` or `--file credentials.json`.
 
 2. Prints the `JWT` and `SECRET_KEY` along with a couple of extra links:
 
