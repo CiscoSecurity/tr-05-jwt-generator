@@ -69,7 +69,7 @@ def enter_credentials(template):
 def encode_jwt(payload, secret_key):
     """Encode a JWT with the given payload and secret key."""
     header = {'alg': 'HS256', 'typ': 'JWT'}
-    return jwt.encode(header, payload, secret_key).decode('utf-8')
+    return jwt.encode(header, payload, secret_key, check=False).decode('utf-8')
 
 
 def build_tr_create_module_page_link(region, module_type_id):
