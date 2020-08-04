@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import argparse
 import json
 import secrets
@@ -83,14 +85,9 @@ def build_tr_create_module_page_link(region, module_type_id):
     if module_type_id is None:
         return 'N/A'
 
-    if region == 'us':
-        region = ''
-    if region:
-        region = '.' + region
-
     return (
-        f'https://visibility{region}.amp.cisco.com/settings/modules/available/'
-        f'{module_type_id}/new'
+        f'https://securex.{region}.security.cisco.com/settings/modules/'
+        f'available/{module_type_id}/new'
     )
 
 
