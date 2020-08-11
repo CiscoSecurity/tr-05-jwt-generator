@@ -1,6 +1,8 @@
-# JWT Generator
+[![Travis CI Build Status](https://travis-ci.com/CiscoSecurity/tr-05-jwt-generator.svg?branch=develop)](https://travis-ci.com/CiscoSecurity/tr-05-jwt-generator)
 
-Simple Python (3.6+) script that:
+# Threat Response JWT Generator
+
+Single Python CLI command that:
 
 1. Prompts the user to enter the required third-party credentials for a given
 integration, encodes them into a `JWT` and signs it with a randomly generated
@@ -22,12 +24,45 @@ just pass the file as an additional argument to the script using the optional
 **NOTE.** The script assumes that in its the working directory there are two
 configuration files: `zappa_settings.json` and `module_settings.json`. Check
 the [Relay Template](https://github.com/CiscoSecurity/tr-05-serverless-relay)
-to get more insight into how such files may look like.
+repository to get more insight into how such files may look like.
 
-## Example Output
+## Installation
+
+- Local
 
 ```
-python3 jwt_generator.py dev
+pip install --upgrade .
+pip show threatresponse-jwt
+```
+
+- GitHub
+
+```
+pip install --upgrade git+https://github.com/CiscoSecurity/tr-05-jwt-generator.git[@branch_name_or_release_version]
+pip show threatresponse-jwt
+```
+
+## Usage
+
+`jwt --help`
+
+```
+usage: jwt [-h] [-f FILE] stage
+
+positional arguments:
+  stage                 a Zappa stage defined in the 'zappa_settings.json'
+                        file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f FILE, --file FILE  a JSON file with some credentials to encode into a JWT
+```
+
+## Execution
+
+`jwt dev`
+
+```
 Enter: Gigamon ThreatINSIGHT API Key: kfy0d9D-MpTDTdoeaPVKFA
 The JWT for the Gigamon ThreatINSIGHT module is:
     eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJrZnkwZDlELU1wVERUZG9lYVBWS0ZBIn0.QWE9wwC2U_6UeJaav2kUXPFTF3aljGL-T0oMaZfMT5k
@@ -40,3 +75,8 @@ Use one of these URLs to navigate to Threat Response in your region and create t
     EU: https://securex.eu.security.cisco.com/settings/modules/available/cdf11c33-0891-491a-8e36-201e4decd3d0/new
     APJC: https://securex.apjc.security.cisco.com/settings/modules/available/904e961f-ff81-48f5-aeb0-5c033e2054b7/new
 ```
+
+**NOTE.** The example above uses the configuration files
+(i.e. `zappa_settings.json` and `module_settings.json`) from the
+[Gigamon ThreatINSIGHT Relay](https://github.com/CiscoSecurity/tr-05-serverless-gigamon-threatinsight)
+repository.
