@@ -1,0 +1,14 @@
+language: python
+
+python:
+- '3.6'
+- '3.7'
+- '3.8'
+
+install:
+- pip install --upgrade .
+- pip install --upgrade --requirement test-requirements.txt
+
+script:
+- pip show threatresponse-jwt
+- flake8 .
